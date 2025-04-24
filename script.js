@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let ws = null;
   let bibliotecaCargada = false;
 
+  const BASE_URL = "https://e63f-2a0c-5a85-d105-8300-f9bb-a4e9-f169-60cf.ngrok-free.app";
+
   function generarIdUsuario() {
     const id = crypto.randomUUID ? crypto.randomUUID() : "user_" + Math.random().toString(36).substring(2, 15);
     localStorage.setItem("userId", id);
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function cargarCanciones() {
-    fetch("http://localhost:3000/kodi", { method: "POST", headers: { "Content-Type": "application/json" } })
+    fetch(`${BASE_URL}/kodi`, { method: "POST", headers: { "Content-Type": "application/json" } })
       .then(res => res.json())
       .then(data => {
         todasLasCanciones = data.files
@@ -93,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch("http://localhost:3000/proponer", {
+    fetch(`${BASE_URL}/proponer`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...cancion, userId: currentUserId })
@@ -109,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch("http://localhost:3000/votar", {
+    fetch(`${BASE_URL}/votar`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ file, userId: currentUserId })
@@ -167,8 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function conectarWebSocketCliente() {
-    const protocolo = location.protocol === "https:" ? "wss:" : "ws:";
-    const wsUrl = `${protocolo}//localhost:3000`;
+    const wsUrl = `wss://e63f-2a0c-5a85-d105-8300-f9bb-a4e9-f169-60cf.ngrok-free.app`;
     ws = new WebSocket(wsUrl);
 
     ws.onopen = () => estadoSpan.innerHTML = "Conectado.";
