@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Kodi Jukebox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Estilos generales del cuerpo */
+    body {
+      font-family: sans-serif;
+      padding: 1rem; /* Padding general */
+      margin: 0 auto; /* Centrar contenido si hay ancho máximo */
+      max-width: 600px; /* Limitar ancho en pantallas grandes */
+      line-height: 1.5; /* Mejorar legibilidad */
+    }
+
+    /* Títulos */
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      color: #333;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem; /* Espacio antes de cada sección */
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.3rem;
+      color: #555;
+    }
+
+    /* Párrafo de estado (canción actual) */
+    #estado {
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.1em;
+      color: #d63384; /* Un color destacado */
+    }
+
+    /* Input de búsqueda */
+    input#busqueda {
+      padding: 0.6rem; /* Un poco más de padding */
+      margin-bottom: 0.8rem; /* Más separación */
+      width: 100%; /* Ancho completo */
+      box-sizing: border-box; /* Evita que padding/border aumenten el tamaño total */
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    /* Botones generales */
+    button {
+      margin-left: 5px;
+      cursor: pointer;
+      padding: 0.4rem 0.6rem; /* Ajustar padding */
+      border: 1px solid #ccc;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    button:hover {
+      background-color: #e2e6ea;
+    }
+
+    /* Estilos para las listas (UL) */
+    ul {
+      list-style: none; /* Sin puntos de lista */
+      padding: 0;
+      margin: 0 0 1.5rem 0; /* Margen inferior para separar de lo siguiente */
+      /* Se eliminaron max-height y overflow-y para evitar scroll interno */
+      border: 1px solid #eee;
+      border-radius: 4px;
+      background-color: #fff; /* Fondo blanco para la lista */
+    }
+
+    /* Estilos para los ítems de lista (LI) */
+    li {
+      margin-bottom: 0; /* Sin margen entre ítems */
+      padding: 0.6rem 0.9rem; /* Padding interno */
+      border-bottom: 1px solid #eee; /* Separador */
+      display: flex; /* Usar Flexbox para alinear contenido */
+      justify-content: space-between; /* Espacio entre texto y botón */
+      align-items: center; /* Centrar verticalmente */
+      font-size: 1em;
+    }
+    /* Quitar borde del último ítem de la lista */
+    li:last-child {
+      border-bottom: none;
+    }
+
+    /* Estilo específico para botones dentro de LI */
+    li button {
+      margin-left: 10px; /* Espacio a la izquierda del botón */
+      white-space: nowrap; /* Evitar que el texto del botón se parta */
+      flex-shrink: 0; /* Evitar que el botón se encoja si el texto es largo */
+    }
+
+    /* Estilo para mensajes dentro de LI (ej. 'Cargando...', 'Cola vacía...') */
+    li.mensaje-lista {
+        justify-content: center; /* Centrar texto de mensajes */
+        font-style: italic;
+        color: #6c757d;
+        padding: 1rem; /* Más padding para mensajes */
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>🎵 Jukebox del Bar</h1>
+
+  <p id="estado">Cargando estado...</p>
+
+  <h2>En Cola (Votar):</h2>
+  <ul id="playlist-queue">
+    <li class="mensaje-lista">Cargando cola...</li>
+  </ul>
+
+  <h2>Biblioteca (Proponer):</h2>
+  <input id="busqueda" placeholder="Buscar en biblioteca..." />
+  <ul id="lista">
+     <li class="mensaje-lista">Cargando biblioteca...</li>
+  </ul>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
